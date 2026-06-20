@@ -552,7 +552,7 @@ def predict_test_set(args=None):
         collate_fn=seg_test_collate_fn,
     )
 
-    ensure_dir(args.output_root)
+    ensure_dir(args.output_dir)
     total = 0
     metrics_by_class = {}  # class_name -> {count, dice_sum, iou_sum}
     dice_sum_all = 0.0
@@ -595,7 +595,7 @@ def predict_test_set(args=None):
             restore_pred = restore_pred_to_original(input_pred, meta)
 
             save_restore_masks(
-                output_root=args.output_root,
+                output_root=args.output_dir,
                 class_name=class_name,
                 stem=stem,
                 orig_gt=orig_gt,
@@ -631,8 +631,8 @@ def predict_test_set(args=None):
     macro_dice = sum(x[2] for x in per_class_metrics) / max(len(per_class_metrics), 1)
     macro_iou = sum(x[3] for x in per_class_metrics) / max(len(per_class_metrics), 1)
 
-    metrics_txt = os.path.join(args.output_root, "metrics_summary.txt")
-    metrics_csv = os.path.join(args.output_root, "metrics_per_class.csv")
+    metrics_txt = os.path.join(args.output_dir, "metrics_summary.txt")
+    metrics_csv = os.path.join(args.output_dir, "metrics_per_class.csv")
     with open(metrics_txt, "w", encoding="utf-8") as f:
         f.write(f"total_samples={total}\n")
         f.write(f"mean_dice_sample={mean_dice_all:.6f}\n")
@@ -656,10 +656,10 @@ def predict_test_set(args=None):
     for class_name, count, mean_dice, mean_iou in per_class_metrics:
         print(f"  {class_name}: n={count}  dice={mean_dice:.4f}  iou={mean_iou:.4f}")
     print("-" * 60)
-    print(f"Done. Saved {total} samples to: {args.output_root}")
+    print(f"Done. Saved {total} samples to: {args.output_dir}")
     print("Saved outputs:")
-    print(f"  {args.output_root}/gt_mask_restore")
-    print(f"  {args.output_root}/pred_mask_restore")
+    print(f"  {args.output_dir}/gt_mask_restore")
+    print(f"  {args.output_dir}/pred_mask_restore")
     print(f"  {metrics_txt}")
     print(f"  {metrics_csv}")
     print("=" * 60)
@@ -672,7 +672,7 @@ def parse_args():
     parser.add_argument("--base-model", required=True, help="Path to the base ViT/CLIP checkpoint.")
     parser.add_argument("--visual-ckpt", required=True, help="Path to the SonoCLIP visual checkpoint.")
     parser.add_argument("--decoder-ckpt", required=True, help="Path to the decoder checkpoint.")
-    parser.add_argument("--output-root", required=True, help="Output directory.")
+    parser.add_argument("--output-dir", required=True, help="Output directory.")
     parser.add_argument(
         "--best-per-class-dir",
         default=None,
@@ -691,7 +691,7 @@ def parse_args():
     args.base_model = os.path.abspath(args.base_model)
     args.visual_ckpt = os.path.abspath(args.visual_ckpt)
     args.decoder_ckpt = os.path.abspath(args.decoder_ckpt)
-    args.output_root = os.path.abspath(args.output_root)
+    args.output_dir = os.path.abspath(args.output_dir)
     return args
 
 

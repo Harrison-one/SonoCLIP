@@ -354,7 +354,7 @@ def main(args=None):
     if args is None:
         args = parse_args()
 
-    checkpoint = args.checkpoint
+    checkpoint = args.classifier_ckpt
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
 
@@ -368,7 +368,7 @@ def main(args=None):
     if not os.path.isfile(args.base_model):
         raise FileNotFoundError(f"base model not found: {args.base_model}")
     model, _ = sonoclip.load(args.base_model, device="cpu", lora_adapt=False, rank=-1)
-    visual_load_info = _load_model(model, args.sono_vision_ckpt, device)
+    visual_load_info = _load_model(model, args.visual_ckpt, device)
     model = model.float().to(device)
     for p in model.parameters():
         p.requires_grad_(False)
@@ -424,7 +424,7 @@ def main(args=None):
 
     print("\n" + "=" * 60)
     print(f"Checkpoint: {checkpoint}")
-    print(f"SonoCLIP visual ckpt: {args.sono_vision_ckpt}")
+    print(f"SonoCLIP visual ckpt: {args.visual_ckpt}")
     print(f"use_mask: {args.use_mask}")
     print("-" * 60)
     print("Final metrics:")
@@ -449,8 +449,8 @@ def parse_args():
         description="Test SonoCLIP linear probe with accuracy and macro-F1."
     )
     parser.add_argument("--base-model", required=True, help="Path to the base ViT/CLIP checkpoint.")
-    parser.add_argument("--sono-vision-ckpt", required=True, help="Path to the SonoCLIP visual checkpoint.")
-    parser.add_argument("--checkpoint", required=True, help="Path to the classifier checkpoint.")
+    parser.add_argument("--visual-ckpt", required=True, help="Path to the SonoCLIP visual checkpoint.")
+    parser.add_argument("--classifier-ckpt", required=True, help="Path to the classifier checkpoint.")
     parser.add_argument("--data-root", required=True, help="Test dataset root.")
     parser.add_argument("--test-txt", required=True, help="Test split txt.")
     parser.add_argument("--output-dir", required=True, help="Directory for metrics and confusion matrix outputs.")
@@ -462,8 +462,8 @@ def parse_args():
     args = parser.parse_args()
 
     args.base_model = os.path.abspath(args.base_model)
-    args.sono_vision_ckpt = os.path.abspath(args.sono_vision_ckpt)
-    args.checkpoint = os.path.abspath(args.checkpoint)
+    args.visual_ckpt = os.path.abspath(args.visual_ckpt)
+    args.classifier_ckpt = os.path.abspath(args.classifier_ckpt)
     args.data_root = os.path.abspath(args.data_root)
     args.test_txt = os.path.abspath(args.test_txt)
     args.output_dir = os.path.abspath(args.output_dir)

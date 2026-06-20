@@ -16,8 +16,6 @@ Official PyTorch implementation of **SonoCLIP**, a region-controllable vision-la
 
 </div>
 
-![SonoCLIP overview](assets/readme/Methods.png)
-
 ## 🔥 News
 
 - **2026-06-20**: Codebase and overview figure are released.
@@ -39,6 +37,8 @@ The pretraining data described in the paper contains **1.44M fetal ultrasound im
 
 ## 🧠 Method
 
+![SonoCLIP overview](assets/readme/Methods.png)
+
 SonoCLIP builds on CLIP ViT-L/14@336px and introduces two main components:
 
 - **Mask-channel visual pathway**: ultrasound images and binary anatomical masks are encoded through parallel stems and fused before the transformer blocks, enabling region-controllable visual representation learning.
@@ -53,7 +53,6 @@ At inference time, SonoCLIP supports:
 
 ### Setup
 
-Our model is based on [CLIP](https://github.com/openai/CLIP). Please first prepare the environment for CLIP, then install SonoCLIP directly.
 
 ```bash
 git clone https://github.com/Harrison-one/SonoCLIP.git
@@ -62,6 +61,10 @@ cd SonoCLIP
 conda create -n sonoclip python=3.10
 conda activate sonoclip
 
+```
+Our model is based on [CLIP](https://github.com/openai/CLIP). Please first prepare the environment for CLIP, then install SonoCLIP directly.
+
+```install
 pip install -e . --no-build-isolation
 ```
 

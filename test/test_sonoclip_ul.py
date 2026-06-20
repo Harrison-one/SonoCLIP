@@ -240,9 +240,9 @@ def evaluate_per_image_features(args=None):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Evaluate SonoCLIP UL zero-shot from anonymous per-image h5 features.")
-    parser.add_argument("--features-dir", required=True, help="Directory containing anonymous per-image h5 files.")
     parser.add_argument("--base-model", required=True, help="Path to the base ViT/CLIP checkpoint for text encoder.")
     parser.add_argument("--vision-ckpt", default=None, help="Optional vision checkpoint path to record with this evaluation.")
+    parser.add_argument("--features-dir", required=True, help="Directory containing anonymous per-image h5 files.")
     parser.add_argument("--class-names-txt", default=None, help="Optional id-to-class txt, e.g. plane_ids.txt.")
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR, help="Directory for saved metric files.")
     parser.add_argument("--batch-size", default=4096, type=int)
