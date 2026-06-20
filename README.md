@@ -20,7 +20,7 @@ Official PyTorch implementation of **SonoCLIP**, a region-controllable vision-la
 
 ## 🔥 News
 
-- **2026-06-20**: Codebase and README figures are released.
+- **2026-06-20**: Codebase and overview figure are released.
 
 ## 📌 Introduction
 
@@ -49,27 +49,11 @@ At inference time, SonoCLIP supports:
 - **Global inference** with an all-one mask.
 - **Mask-guided inference** with a provided or generated anatomical mask.
 
-## Datasets
-
-![FetalP24](assets/readme/FetalP24.png)
-
-### FetalP24
-
-FetalP24 is the large-scale pretraining dataset used in the paper. It covers 24 fetal ultrasound planes and includes image-level plane labels, mask annotations, gestational age metadata, and normalized text descriptions.
-
-### FetalP6 and FetalP5
-
-FetalP6 is used for downstream fetal plane classification across six categories. FetalP5 is used for downstream segmentation across five categories.
-
-![FetalP6 classification](assets/readme/FetalP6_cls.png)
-
-![FetalP5 segmentation](assets/readme/FetalP5_seg.png)
-
-Raw private clinical images are not redistributed in this repository. Public users should prepare datasets according to the expected directory layout in the scripts.
-
 ## 🚀 Quick Start
 
 ### Setup
+
+Our model is based on [CLIP](https://github.com/openai/CLIP). Please first prepare the environment for CLIP, then install SonoCLIP directly.
 
 ```bash
 git clone https://github.com/Harrison-one/SonoCLIP.git
