@@ -26,7 +26,7 @@ Fetal ultrasound is widely used in prenatal screening, but automatic analysis re
 
 SonoCLIP addresses this by introducing **mask-guided region-aware contrastive pretraining** for fetal ultrasound. The model appends anatomical masks as visual prompts through a mask-channel pathway, allowing the same backbone to support both global image understanding and region-focused inference.
 
-The current release provides the public SonoCLIP code, model definitions, dataset wrappers, feature-based evaluation scripts, baseline trainers, and launcher scripts needed to reproduce the open zero-shot classification, classification, and segmentation workflows. Private fetal ultrasound data used in the paper is not redistributed.
+The current release provides the public SonoCLIP code, model definitions, dataset wrappers, feature-based evaluation scripts, baseline trainers, and launcher scripts needed to reproduce the open zero-shot classification, classification, and segmentation workflows.
 
 ## ✨ Highlights
 
@@ -80,7 +80,7 @@ If you install PyTorch manually, choose the CUDA build that matches your machine
 
 ### Checkpoints
 
-Place checkpoints under:
+Download checkpoints from [Google Drive](https://drive.google.com/drive/folders/1zLHNd9ZE8pPNHexrJZsYreQA0EqvhRP9), then place them under:
 
 ```text
 checkpoints/
@@ -127,12 +127,12 @@ FetalP24 Zero-shot classification:
 python test/test_sonoclip_ul.py \
   --base-model checkpoints/ViT-L-14-336px.pt \
   --vision-ckpt checkpoints/sonoclip_vision.pth \
-  --features-dir /path/to/ul_features_per_image_w_mask \
-  --class-names-txt /path/to/ul_plane_ids.txt \
+  --features-dir /path/to/ul_data/FetalP24/w_o_mask \
+  --class-names-txt /path/to/ul_data/FetalP24/ul_plane_ids.txt \
   --output-dir test_outputs/ul_fea_per_image
 ```
 
-For Mask-assisted evaluation, use features `--features-dir /path/to/ul_features_per_image_w_mask`.
+For Mask-assisted evaluation, use features `--features-dir /path/to/FetalP24/w_mask`.
 
 FetalP6 classification:
 
@@ -141,8 +141,8 @@ python test/test_sonoclip_cls.py \
   --base-model checkpoints/ViT-L-14-336px.pt \
   --visual-ckpt checkpoints/sonoclip_vision.pth \
   --classifier-ckpt checkpoints/sonoclip_cls.pth \
-  --data-root /path/to/FetalP6 \
-  --test-txt /path/to/FetalP6_split/test.txt \
+  --data-root /path/to/ul_data/FetalP6 \
+  --test-txt /path/to/ul_data/FetalP6/test.txt \
   --output-dir test_outputs/cls
 ```
 
@@ -155,14 +155,14 @@ python test/test_sonoclip_seg.py \
   --base-model checkpoints/ViT-L-14-336px.pt \
   --visual-ckpt checkpoints/sonoclip_vision.pth \
   --decoder-ckpt checkpoints/sonoclip_seg.pth \
-  --data-root /path/to/FetalP5 \
-  --test-txt /path/to/FetalP5_split/test.txt \
+  --data-root /path/to/ul_data/FetalP5 \
+  --test-txt /path/to/ul_data/FetalP5/test.txt \
   --output-dir test_outputs/seg
 ```
 
 ## 📊 Main Results
 
-### Zero-shot classification on FetalPT24
+### Zero-shot classification on FetalP24
 
 | Method | Top-1 | Top-5 |
 | --- | ---: | ---: |

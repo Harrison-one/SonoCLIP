@@ -9,9 +9,9 @@ JOB_NAME=sonoclip_cls
 EXP_NAME=log/sonoclip_cls
 # Dataset paths. DATA_ROOT should contain class_name/images and class_name/masks.
 # train/test txt format: stem<TAB>label_id<TAB>class_name
-DATA_ROOT=../ul_data/FetalP6_cls_plane
-TRAIN_TXT=../ul_data/FetalP6_cls_plane/train.txt
-TEST_TXT=../ul_data/FetalP6_cls_plane/test.txt
+DATA_ROOT=../ul_data/FetalP6
+TRAIN_TXT=../ul_data/FetalP6/train.txt
+TEST_TXT=../ul_data/FetalP6/test.txt
 
 # Model checkpoints, relative to this train/ directory after cd.
 BASE_MODEL_PATH=../checkpoints/ViT-L-14-336px.pt

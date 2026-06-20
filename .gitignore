@@ -5,7 +5,8 @@ build/
 dist/
 .agents/
 .codex/
-checkpoints/
+checkpoints/*
+!checkpoints/.gitkeep
 checkpoints_new/
 checkpoints_ori/
 test_ori/

@@ -11,9 +11,9 @@ EXP_NAME=log/sonoclip_seg_new_2
 # 数据地址集中在这里改
 # DATA_ROOT 下应是 class_name/images 和 class_name/masks
 # train/test txt 每行格式：stem<TAB>label_id<TAB>class_name
-DATA_ROOT=../ul_data/FetalP5_cls_plane
-TRAIN_TXT=../ul_data/FetalP5_cls_plane/train.txt
-TEST_TXT=../ul_data/FetalP5_cls_plane/test.txt
+DATA_ROOT=../ul_data/FetalP5
+TRAIN_TXT=../ul_data/FetalP5/train.txt
+TEST_TXT=../ul_data/FetalP5/test.txt
 
 # 模型初始化地址
 BASE_MODEL_PATH=../checkpoints/ViT-L-14-336px.pt
