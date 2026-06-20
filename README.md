@@ -204,10 +204,6 @@ SonoCLIP/
 |-- assets/readme/            # README figures
 |-- checkpoints/              # checkpoint placeholder directory
 |-- CLIP/                     # original CLIP reference implementation
-|-- pyproject.toml
-|-- README.md
-|-- requirements.txt
-|-- setup.py
 |-- sonoclip/                 # SonoCLIP model and tokenizer code
 |-- test/                     # evaluation scripts
 |-- train/
@@ -216,19 +212,22 @@ SonoCLIP/
 |   |-- train_sonoclip.sh     # pretraining launcher
 |   |-- train_sonoclip_cls.sh # classification launcher
 |   `-- train_sonoclip_seg.sh # segmentation launcher
-`-- ul_data/                  # data placeholder directory
+|-- ul_data/                  # data placeholder directory
+|-- pyproject.toml
+|-- README.md
+|-- requirements.txt
+`-- setup.py
 ```
 
 Local-only files under `checkpoints/` and `ul_data/`, plus `test_outputs/`, `train/log/`, caches, and internal notes, are intentionally excluded from git.
-
-## Notes on Privacy
-
-This repository is intended to release code and lightweight README assets. Private raw ultrasound images, local test outputs, PDF drafts, and checkpoints are not committed. Feature files or checkpoints may still contain information derived from private data and should be reviewed before release.
 
 ## ❤️ Acknowledgments
 
 - [CLIP](https://github.com/openai/CLIP): SonoCLIP builds on the CLIP vision-language framework and keeps a local CLIP reference implementation in this repository.
 - [Alpha-CLIP](https://github.com/SunzeY/AlphaCLIP): SonoCLIP is inspired by Alpha-CLIP's region-controllable design and adapts the mask/alpha-channel idea to fetal ultrasound analysis.
+- [big_vision](https://github.com/google-research/big_vision): The sigmoid pairwise contrastive loss follows the big_vision implementation style.
+- [MFP Dataset](https://github.com/vahidashkani/Fast-U-Net/tree/main/Dataset): We acknowledge the public MFP fetal ultrasound dataset.
+- [FETAL_PLANES_DB](https://zenodo.org/records/3904280): We acknowledge the public FETAL_PLANES_DB fetal ultrasound plane dataset.
 
 Thanks to these projects for their excellent open-source work.
 
