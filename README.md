@@ -12,7 +12,7 @@
 
 Official PyTorch implementation of **SonoCLIP**, a region-controllable vision-language foundation model for fetal ultrasound analysis.
 
-[Introduction](#-introduction) | [Highlights](#-highlights) | [Method](#-method) | [Quick Start](#-quick-start) | [Evaluation](#-evaluation) | [Results](#-main-results) | [Acknowledgments](#-acknowledgments) | [Citation](#-citation)
+[Introduction](#-introduction) | [Highlights](#-highlights) | [Method](#-method) | [Quick Start](#-quick-start) | [Evaluation](#-evaluation) | [Results](#-main-results) | [Acknowledgments](#-acknowledgments) | [Citation](#-citation) | [License](#-license)
 
 </div>
 
@@ -49,7 +49,7 @@ At inference time, SonoCLIP supports:
 - **Global inference** with an all-one mask.
 - **Mask-guided inference** with a provided or generated anatomical mask.
 
-## 📁 Datasets
+## Datasets
 
 ![FetalP24](assets/readme/FetalP24.png)
 
@@ -248,4 +248,9 @@ If you find this project useful, please cite the paper once the final citation i
 
 ## 📄 License
 
-This repository is released under the MIT License.
+![Code License](https://img.shields.io/badge/Code%20License-MIT-green.svg)
+![Data License](https://img.shields.io/badge/Data%20License-CC%20BY--NC%204.0-red.svg)
+
+**Usage and License Notices**: The code is released under the MIT License. The data and checkpoints are intended and licensed for research use only. They are also restricted to uses that follow the license agreement of [CLIP](https://github.com/openai/CLIP).
+
+The dataset is licensed under CC BY-NC 4.0, allowing non-commercial use only. Models trained using the dataset should not be used outside research purposes.
