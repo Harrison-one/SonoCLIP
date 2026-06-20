@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+import csv
 from pathlib import Path
 
 import numpy as np
@@ -24,8 +25,71 @@ sys.meta_path[:] = [
 
 import torch
 
-from test_sonoclip_ul import simple_templates, zeroshot_classifier, save_metrics
-from test_sonoclip_ul_fea import load_text_model, require_file
+import sonoclip
+from tqdm import tqdm
+
+
+simple_templates = [
+    "A fetal ultrasound {} view.",
+    "An ultrasound image of the fetal {} view.",
+    "A standard fetal ultrasound scan showing the {} view.",
+    "This is a fetal ultrasound image in the {} view.",
+    "A prenatal ultrasound image of the fetal {} view.",
+]
+
+
+def require_file(path, name):
+    if not os.path.isfile(path):
+        raise FileNotFoundError(f"{name} not found: {path}")
+
+
+def load_text_model(base_model_path, device):
+    require_file(base_model_path, "Base model")
+    print(f"Loading base model for text encoder: {base_model_path}")
+    model, _ = sonoclip.load(base_model_path, device=device)
+    model.eval()
+    return model
+
+
+def zeroshot_classifier(classnames, templates, model, device):
+    with torch.no_grad():
+        zeroshot_weights = []
+        for classname in tqdm(classnames, desc="Computing text embeddings"):
+            texts = [template.format(classname) for template in templates]
+            texts = sonoclip.tokenize(texts).to(device)
+
+            class_embeddings = model.encode_text(texts)
+            class_embeddings = class_embeddings / class_embeddings.norm(dim=-1, keepdim=True)
+
+            class_embedding = class_embeddings.mean(dim=0)
+            class_embedding = class_embedding / class_embedding.norm()
+            zeroshot_weights.append(class_embedding)
+
+        zeroshot_weights = torch.stack(zeroshot_weights, dim=1).to(device)
+
+    print(f"Generated zero-shot weights for {len(classnames)} classes using {len(templates)} templates per class")
+    return zeroshot_weights
+
+
+def save_metrics(output_dir, per_class_rows, acc1, acc5):
+    os.makedirs(output_dir, exist_ok=True)
+
+    per_class_csv = os.path.join(output_dir, "ul_per_class_metrics.csv")
+    summary_txt = os.path.join(output_dir, "ul_summary_metrics.txt")
+
+    with open(per_class_csv, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=["class_name", "total", "top1", "top5", "top1_acc", "top5_acc"],
+        )
+        writer.writeheader()
+        writer.writerows(per_class_rows)
+
+    with open(summary_txt, "w", encoding="utf-8") as f:
+        f.write(f"top1_accuracy_mean_per_class={acc1:.6f}\n")
+        f.write(f"top5_accuracy_mean_per_class={acc5:.6f}\n")
+
+    return per_class_csv, summary_txt
 
 
 def require_h5py():
@@ -155,7 +219,6 @@ def evaluate_per_image_features(args=None):
     if args.vision_ckpt:
         require_file(args.vision_ckpt, "Vision checkpoint")
         print(f"Vision checkpoint argument: {args.vision_ckpt}")
-        print("Note: feature-only evaluation uses pre-extracted image_features; --vision-ckpt is recorded only.")
 
     model = load_text_model(args.base_model, device)
     zeroshot_weights = zeroshot_classifier(class_names, simple_templates, model, device)

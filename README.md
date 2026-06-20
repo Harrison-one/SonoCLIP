@@ -121,28 +121,32 @@ The shell launchers define dataset roots, checkpoint paths, GPU settings, and ou
 
 ## 🧪 Evaluation
 
-Zero-shot fetal ultrasound classification from anonymous per-image h5 features:
+FetalP24 Zero-shot classification:
 
 ```bash
 python test/test_sonoclip_ul.py \
-  --features-dir /path/to/ul_features_per_image \
   --base-model checkpoints/ViT-L-14-336px.pt \
   --vision-ckpt checkpoints/sonoclip_vision.pth \
+  --features-dir /path/to/ul_features_per_image \
   --class-names-txt /path/to/ul_plane_ids.txt \
   --output-dir test_outputs/ul_fea_per_image
 ```
+
+For Mask-assisted evaluation, extract the per-image features with `--use-mask` first, then evaluate the saved features with the command above.
 
 FetalP6 classification:
 
 ```bash
 python test/test_sonoclip_cls.py \
   --base-model checkpoints/ViT-L-14-336px.pt \
-  --sono-vision-ckpt checkpoints/sonoclip_vision.pth \
-  --checkpoint checkpoints/sonoclip_cls.pth \
+  --visual-ckpt checkpoints/sonoclip_vision.pth \
+  --classifier-ckpt checkpoints/sonoclip_cls.pth \
   --data-root /path/to/FetalP6 \
   --test-txt /path/to/FetalP6_split/test.txt \
   --output-dir test_outputs/cls
 ```
+
+Add `--use-mask` to enable Mask-assisted classification.
 
 FetalP5 segmentation:
 
@@ -153,7 +157,7 @@ python test/test_sonoclip_seg.py \
   --decoder-ckpt checkpoints/sonoclip_seg.pth \
   --data-root /path/to/FetalP5 \
   --test-txt /path/to/FetalP5_split/test.txt \
-  --output-root test_outputs/seg
+  --output-dir test_outputs/seg
 ```
 
 ## 📊 Main Results
