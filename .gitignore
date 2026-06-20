@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.agents/
+.codex/
+checkpoints/
+checkpoints_new/
+checkpoints_ori/
+test_ori/
+test_outputs/
+train/log/
+ul_data/test/
+ul_test_new/
+RUN_COMMANDS.md

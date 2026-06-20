@@ -1,0 +1,15 @@
+ftfy
+packaging
+regex
+tqdm
+torch
+torchvision
+numpy<2
+Pillow
+opencv-python<4.11
+pycocotools
+loralib
+tensorboard
+h5py
+scikit-learn
+matplotlib
