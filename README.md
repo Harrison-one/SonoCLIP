@@ -78,12 +78,18 @@ torchvision 0.14.1+cu117
 
 If you install PyTorch manually, choose the CUDA build that matches your machine first, then run `pip install -e .`.
 
-### Checkpoints
+### Checkpoints and Data
 
 Download checkpoints from [Google Drive](https://drive.google.com/drive/folders/1zLHNd9ZE8pPNHexrJZsYreQA0EqvhRP9), then place them under:
 
 ```text
 checkpoints/
+```
+
+Download data from [Google Drive](https://drive.google.com/drive/folders/1AC2Xm0kQhn0aVV_RMY9DVAJVajhlj0z6), then place them under:
+
+```text
+ul_data/
 ```
 
 Expected examples:
@@ -95,7 +101,7 @@ checkpoints/sonoclip_cls.pth
 checkpoints/sonoclip_seg.pth
 ```
 
-Checkpoint files are ignored by git.
+Checkpoint and data files are ignored by git.
 
 ## 🏋️ Training
 
@@ -195,23 +201,25 @@ python test/test_sonoclip_seg.py \
 
 ```text
 SonoCLIP/
+|-- assets/readme/            # README figures
+|-- checkpoints/              # checkpoint placeholder directory
+|-- CLIP/                     # original CLIP reference implementation
+|-- pyproject.toml
+|-- README.md
+|-- requirements.txt
+|-- setup.py
 |-- sonoclip/                 # SonoCLIP model and tokenizer code
+|-- test/                     # evaluation scripts
 |-- train/
 |   |-- dataset/              # fetal ultrasound dataset loaders
 |   |-- train/                # training entrypoints
 |   |-- train_sonoclip.sh     # pretraining launcher
 |   |-- train_sonoclip_cls.sh # classification launcher
 |   `-- train_sonoclip_seg.sh # segmentation launcher
-|-- test/                     # evaluation scripts
-|-- CLIP/                     # original CLIP reference implementation
-|-- assets/readme/            # README figures
-|-- requirements.txt
-|-- setup.py
-|-- pyproject.toml
-`-- README.md
+`-- ul_data/                  # data placeholder directory
 ```
 
-Local-only folders such as `checkpoints/`, `test_outputs/`, `train/log/`, raw ultrasound data, caches, and internal notes are intentionally excluded from git.
+Local-only files under `checkpoints/` and `ul_data/`, plus `test_outputs/`, `train/log/`, caches, and internal notes, are intentionally excluded from git.
 
 ## Notes on Privacy
 

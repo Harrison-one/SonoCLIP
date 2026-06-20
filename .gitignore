@@ -12,7 +12,8 @@ checkpoints_ori/
 test_ori/
 test_outputs/
 train/log/
-ul_data/test/
+ul_data/*
+!ul_data/.gitkeep
 ul_test_new/
 RUN_COMMANDS.md
 5124(1).pdf
