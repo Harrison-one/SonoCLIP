@@ -26,7 +26,7 @@ Fetal ultrasound is widely used in prenatal screening, but automatic analysis re
 
 SonoCLIP addresses this by introducing **mask-guided region-aware contrastive pretraining** for fetal ultrasound. The model appends anatomical masks as visual prompts through a mask-channel pathway, allowing the same backbone to support both global image understanding and region-focused inference.
 
-The pretraining data described in the paper contains **1.44M fetal ultrasound image-text pairs** spanning **24 standard fetal planes**, with global plane descriptions and mask-based regional captions.
+The current release provides the public SonoCLIP code, model definitions, dataset wrappers, feature-based evaluation scripts, baseline trainers, and launcher scripts needed to reproduce the open zero-shot classification, classification, and segmentation workflows. Private fetal ultrasound data used in the paper is not redistributed.
 
 ## ✨ Highlights
 
@@ -127,12 +127,12 @@ FetalP24 Zero-shot classification:
 python test/test_sonoclip_ul.py \
   --base-model checkpoints/ViT-L-14-336px.pt \
   --vision-ckpt checkpoints/sonoclip_vision.pth \
-  --features-dir /path/to/ul_features_per_image \
+  --features-dir /path/to/ul_features_per_image_w_mask \
   --class-names-txt /path/to/ul_plane_ids.txt \
   --output-dir test_outputs/ul_fea_per_image
 ```
 
-For Mask-assisted evaluation, extract the per-image features with `--use-mask` first, then evaluate the saved features with the command above.
+For Mask-assisted evaluation, use features `--features-dir /path/to/ul_features_per_image_w_mask`.
 
 FetalP6 classification:
 
