@@ -80,13 +80,13 @@ If you install PyTorch manually, choose the CUDA build that matches your machine
 
 ### Checkpoints and Data
 
-Download checkpoints from [Google Drive](https://drive.google.com/drive/folders/1zLHNd9ZE8pPNHexrJZsYreQA0EqvhRP9), then place them under:
+Download [checkpoints](https://drive.google.com/drive/folders/1zLHNd9ZE8pPNHexrJZsYreQA0EqvhRP9), then place them under:
 
 ```text
 checkpoints/
 ```
 
-Download data from [Google Drive](https://drive.google.com/drive/folders/1AC2Xm0kQhn0aVV_RMY9DVAJVajhlj0z6), then place them under:
+Download [data](https://drive.google.com/drive/folders/1AC2Xm0kQhn0aVV_RMY9DVAJVajhlj0z6), then place them under:
 
 ```text
 ul_data/
@@ -101,7 +101,11 @@ checkpoints/sonoclip_cls.pth
 checkpoints/sonoclip_seg.pth
 ```
 
-Checkpoint and data files are ignored by git.
+```text
+ul_data/FetalP24
+ul_data/FetalP6
+ul_data/FetalP5
+```
 
 ## 🏋️ Training
 
@@ -123,8 +127,6 @@ Downstream segmentation:
 bash train/train_sonoclip_seg.sh
 ```
 
-The shell launchers define dataset roots, checkpoint paths, GPU settings, and output folders near the top of each file.
-
 ## 🧪 Evaluation
 
 FetalP24 Zero-shot classification:
@@ -138,7 +140,7 @@ python test/test_sonoclip_ul.py \
   --output-dir test_outputs/ul_fea_per_image
 ```
 
-For Mask-assisted evaluation, use features `--features-dir /path/to/FetalP24/w_mask`.
+For Mask-assisted evaluation, use features `--features-dir /path/to/ul_data/FetalP24/w_mask`.
 
 FetalP6 classification:
 
@@ -219,15 +221,13 @@ SonoCLIP/
 `-- setup.py
 ```
 
-Local-only files under `checkpoints/` and `ul_data/`, plus `test_outputs/`, `train/log/`, caches, and internal notes, are intentionally excluded from git.
-
 ## ❤️ Acknowledgments
 
 - [CLIP](https://github.com/openai/CLIP): SonoCLIP builds on the CLIP vision-language framework and keeps a local CLIP reference implementation in this repository.
 - [Alpha-CLIP](https://github.com/SunzeY/AlphaCLIP): SonoCLIP is inspired by Alpha-CLIP's region-controllable design and adapts the mask/alpha-channel idea to fetal ultrasound analysis.
-- [big_vision](https://github.com/google-research/big_vision): The sigmoid pairwise contrastive loss follows the big_vision implementation style.
-- [MFP Dataset](https://github.com/vahidashkani/Fast-U-Net/tree/main/Dataset): We acknowledge the public MFP fetal ultrasound dataset.
-- [FETAL_PLANES_DB](https://zenodo.org/records/3904280): We acknowledge the public FETAL_PLANES_DB fetal ultrasound plane dataset.
+- [big_vision](https://github.com/google-research/big_vision): SonoCLIP's sigmoid pairwise contrastive loss is inspired by the big_vision implementation.
+- [MFP](https://github.com/vahidashkani/Fast-U-Net/tree/main/Dataset): We gratefully acknowledge the authors for publicly releasing the MFP fetal ultrasound dataset.
+- [FETAL_PLANES_DB](https://zenodo.org/records/3904280): We gratefully acknowledge the authors for publicly releasing the FETAL_PLANES_DB fetal ultrasound plane dataset.
 
 Thanks to these projects for their excellent open-source work.
 
