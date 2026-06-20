@@ -26,7 +26,7 @@ Fetal ultrasound is widely used in prenatal screening, but automatic analysis re
 
 SonoCLIP addresses this by introducing **mask-guided region-aware contrastive pretraining** for fetal ultrasound. The model appends anatomical masks as visual prompts through a mask-channel pathway, allowing the same backbone to support both global image understanding and region-focused inference.
 
-The current release provides the public SonoCLIP code, model definitions, dataset wrappers, feature-based evaluation scripts, baseline trainers, and launcher scripts needed to reproduce the open zero-shot classification, classification, and segmentation workflows.
+The current release provides the public SonoCLIP code, model definitions, dataset wrappers, evaluation scripts, baseline trainers, and launcher scripts needed to reproduce the open zero-shot classification, classification, and segmentation workflows.
 
 ## ✨ Highlights
 
@@ -66,14 +66,6 @@ Our model is based on [CLIP](https://github.com/openai/CLIP). Please first prepa
 
 ```install
 pip install -e . --no-build-isolation
-```
-
-The current implementation was tested with:
-
-```text
-Python 3.10
-torch 1.13.1+cu117
-torchvision 0.14.1+cu117
 ```
 
 If you install PyTorch manually, choose the CUDA build that matches your machine first, then run `pip install -e .`.
