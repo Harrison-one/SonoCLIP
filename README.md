@@ -1,19 +1,28 @@
-# SonoCLIP: Mask-Guided Region-Aware Vision-Language Pretraining for Fetal Ultrasound Analysis
+<div align="center">
 
+# SonoCLIP
+
+### Mask-Guided Region-Aware Vision-Language Pretraining for Fetal Ultrasound Analysis
+
+[![Paper](https://img.shields.io/badge/Paper-coming_soon-blue.svg)]()
+[![Code](https://img.shields.io/badge/Code-SonoCLIP-black.svg)](https://github.com/Harrison-one/SonoCLIP)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)]()
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.13+-ee4c2c.svg)]()
 
 Official PyTorch implementation of **SonoCLIP**, a region-controllable vision-language foundation model for fetal ultrasound analysis.
 
-Paper: coming soon  
-Code: https://github.com/Harrison-one/SonoCLIP
+[Introduction](#-introduction) | [Highlights](#-highlights) | [Method](#-method) | [Quick Start](#-quick-start) | [Evaluation](#-evaluation) | [Results](#-main-results) | [Acknowledgments](#-acknowledgments) | [Citation](#-citation)
 
-Introduction | Method | Quick Start | Evaluation | Main Results | Repository Structure | Citation
+</div>
 
 ![SonoCLIP overview](assets/readme/Methods.png)
 
-## Introduction
+## 🔥 News
+
+- **2026-06-20**: Codebase and README figures are released.
+
+## 📌 Introduction
 
 Fetal ultrasound is widely used in prenatal screening, but automatic analysis remains difficult because of speckle noise, acquisition variability, view-dependent artifacts, and subtle anatomical boundaries. Generic CLIP-style vision-language models usually rely on global image-text alignment, which can miss clinically important local structures.
 
@@ -21,7 +30,14 @@ SonoCLIP addresses this by introducing **mask-guided region-aware contrastive pr
 
 The pretraining data described in the paper contains **1.44M fetal ultrasound image-text pairs** spanning **24 standard fetal planes**, with global plane descriptions and mask-based regional captions.
 
-## Method
+## ✨ Highlights
+
+- **Region-controllable fetal ultrasound representation learning** with a mask-channel visual pathway.
+- **Global and local alignment** through mixed image-level captions and mask-guided region descriptions.
+- **Scalable pairwise contrastive training** using a sigmoid alignment objective.
+- **Strong transfer performance** on zero-shot classification, linear-probe classification, and segmentation benchmarks.
+
+## 🧠 Method
 
 SonoCLIP builds on CLIP ViT-L/14@336px and introduces two main components:
 
@@ -33,7 +49,7 @@ At inference time, SonoCLIP supports:
 - **Global inference** with an all-one mask.
 - **Mask-guided inference** with a provided or generated anatomical mask.
 
-## Datasets
+## 📁 Datasets
 
 ![FetalP24](assets/readme/FetalP24.png)
 
@@ -51,7 +67,7 @@ FetalP6 is used for downstream fetal plane classification across six categories.
 
 Raw private clinical images are not redistributed in this repository. Public users should prepare datasets according to the expected directory layout in the scripts.
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Setup
 
@@ -94,7 +110,7 @@ checkpoints/sonoclip_seg.pth
 
 Checkpoint files are ignored by git.
 
-## Training
+## 🏋️ Training
 
 SonoCLIP pretraining:
 
@@ -116,7 +132,7 @@ bash train/train_sonoclip_seg.sh
 
 The shell launchers define dataset roots, checkpoint paths, GPU settings, and output folders near the top of each file.
 
-## Evaluation
+## 🧪 Evaluation
 
 Zero-shot fetal ultrasound classification from anonymous per-image h5 features:
 
@@ -153,7 +169,7 @@ python test/test_sonoclip_seg.py \
   --output-root test_outputs/seg
 ```
 
-## Main Results
+## 📊 Main Results
 
 ### Zero-shot classification on FetalPT24
 
@@ -184,7 +200,7 @@ python test/test_sonoclip_seg.py \
 | FetalCLIP | 69.8 | 60.2 |
 | SonoCLIP (w/o mask) | **87.2** | **80.5** |
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 ```text
 SonoCLIP/
@@ -210,7 +226,14 @@ Local-only folders such as `checkpoints/`, `test_outputs/`, `train/log/`, raw ul
 
 This repository is intended to release code and lightweight README assets. Private raw ultrasound images, local test outputs, PDF drafts, and checkpoints are not committed. Feature files or checkpoints may still contain information derived from private data and should be reviewed before release.
 
-## Citation
+## ❤️ Acknowledgments
+
+- [CLIP](https://github.com/openai/CLIP): SonoCLIP builds on the CLIP vision-language framework and keeps a local CLIP reference implementation in this repository.
+- [Alpha-CLIP](https://github.com/SunzeY/AlphaCLIP): SonoCLIP is inspired by Alpha-CLIP's region-controllable design and adapts the mask/alpha-channel idea to fetal ultrasound analysis.
+
+Thanks to these projects for their excellent open-source work.
+
+## ✒️ Citation
 
 If you find this project useful, please cite the paper once the final citation is available:
 
@@ -223,6 +246,6 @@ If you find this project useful, please cite the paper once the final citation i
 }
 ```
 
-## License
+## 📄 License
 
 This repository is released under the MIT License.
