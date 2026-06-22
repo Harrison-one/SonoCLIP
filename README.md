@@ -7,8 +7,6 @@
 [![Paper](https://img.shields.io/badge/Paper-coming_soon-blue.svg)]()
 [![Code](https://img.shields.io/badge/Code-SonoCLIP-black.svg)](https://github.com/Harrison-one/SonoCLIP)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10-blue.svg)]()
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.13+-ee4c2c.svg)]()
 
 Official PyTorch implementation of **SonoCLIP**, a region-controllable vision-language foundation model for fetal ultrasound analysis.
 
@@ -72,31 +70,40 @@ If you install PyTorch manually, choose the CUDA build that matches your machine
 
 ### Checkpoints and Data
 
-Download [checkpoints](https://drive.google.com/drive/folders/1zLHNd9ZE8pPNHexrJZsYreQA0EqvhRP9), then place them under:
+You can download the required checkpoints and pre-processed datasets from the following links.
+
+#### Checkpoints
+
+| File | Description | Link | Place under |
+| --- | --- | --- | --- |
+| SonoCLIP checkpoint | Vision-language pretrained SonoCLIP weights | [Google Drive](https://drive.google.com/file/d/1exSqoF_kfZQeumGqzpwtU2WSEzewFU4Z/view?usp=drive_link) | `checkpoints/` |
+| Downstream task checkpoints | Classification and segmentation checkpoints | [Google Drive](https://drive.google.com/file/d/1CcD8JI48c0_DunNezvOcQoOVxcxyXp4z/view) | `checkpoints/` |
+
+Expected checkpoint layout:
 
 ```text
 checkpoints/
+|-- ViT-L-14-336px.pt
+|-- sonoclip_vision.pth
+|-- sonoclip_cls.pth
+`-- sonoclip_seg.pth
 ```
 
-Download [data](https://drive.google.com/drive/folders/1AC2Xm0kQhn0aVV_RMY9DVAJVajhlj0z6), then place them under:
+#### Data
+
+| Dataset | Description | Link | Place under |
+| --- | --- | --- | --- |
+| FetalP24 | Zero-shot fetal plane classification features/data | [Google Drive](https://drive.google.com/file/d/1mYcavqKTCb70yQVWYgPI5NIky6Cb-cFP/view?usp=drive_link) | `ul_data/FetalP24/` |
+| FetalP6 | Downstream classification dataset | [Google Drive](https://drive.google.com/file/d/1ye2BXpeWvUuGIbykQ-bjt14HgNKg6qMU/view?usp=drive_link) | `ul_data/FetalP6/` |
+| FetalP5 | Downstream segmentation dataset | [Google Drive](https://drive.google.com/file/d/1hJl7L79lYRXxXGC9D3KtKcGWt-O8gJuT/view?usp=drive_link) | `ul_data/FetalP5/` |
+
+Expected data layout:
 
 ```text
 ul_data/
-```
-
-Expected examples:
-
-```text
-checkpoints/ViT-L-14-336px.pt
-checkpoints/sonoclip_vision.pth
-checkpoints/sonoclip_cls.pth
-checkpoints/sonoclip_seg.pth
-```
-
-```text
-ul_data/FetalP24
-ul_data/FetalP6
-ul_data/FetalP5
+|-- FetalP24/
+|-- FetalP6/
+`-- FetalP5/
 ```
 
 ## 🏋️ Training
